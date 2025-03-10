@@ -1,0 +1,48 @@
+{
+  "expo": {
+    "name": "DeepKart",
+    "slug": "deepKart",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./src/pngs/das.png",
+    "scheme": "myapp",
+    "userInterfaceStyle": "automatic",
+    "newArchEnabled": true,
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./src/pngs/das.png",
+        "backgroundColor": "#fff"
+      },
+      "package": "com.deepak7.dasFinance"
+    },
+    "bundler": "metro",
+    "output": "static",
+    "favicon": "./src/pngs/das.png",
+    "plugins": [
+      "expo-router",
+      [
+        "expo-splash-screen",
+        {
+          "image": "./src/pngs/das.png",
+          "imageWidth": 200,
+          "resizeMode": "contain",
+          "backgroundColor": "#fff"
+        }
+      ]
+    ],
+    "experiments": {
+      "typedRoutes": true
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "a9bb2918-1ef2-4437-96a4-a56c337f2268"
+      }
+    }
+  }
+}

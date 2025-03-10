@@ -1,0 +1,50 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
+const API_URL = process.env.EXPO_PUBLIC_BACKEND_URL; // Replace with your API URL
+
+export const getAddresses = async () => {
+  try {
+    const token = await getToken();
+    const response = await fetch(`${API_URL}/users/me`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to fetch addresses");
+    }
+
+    return response.json();
+  } catch (error) {
+    console.error("Error fetching addresses:", error);
+    throw error; // Rethrow the error to be handled by the component
+  }
+};
+
+export const getAddressById = async (addressId: any) => {
+  try {
+    const token = await getToken(); // Implement getToken() to retrieve the user's JWT token
+    const response = await fetch(`${API_URL}/users/me/${addressId}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to fetch address");
+    }
+
+    return response.json();
+  } catch (error) {
+    console.error("Error fetching address:", error);
+    throw error; // Rethrow the error to be handled by the component
+  }
+};
+
+const getToken = async () => {
+  const token = await AsyncStorage.getItem("authToken");
+  if (!token) {
+    throw new Error("No token found");
+  }
+  return token;
+};
