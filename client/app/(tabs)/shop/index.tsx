@@ -39,6 +39,7 @@ export default function ShopScreen() {
                 renderItem={({ item }) => <ProductItem product={item} />}
                 keyExtractor={(item) => item._id}
                 style={styles.container}
+                numColumns={2}
             />
         </View>
     );
@@ -46,7 +47,7 @@ export default function ShopScreen() {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        // flex: 1,
         backgroundColor: Colors.colors.cyan[100]
     },
     loading: {

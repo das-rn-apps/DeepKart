@@ -42,13 +42,12 @@ export default function CategoriesSection() {
 const styles = StyleSheet.create({
     section: {
         backgroundColor: Colors.colors.cyan[100],
+        padding: 10,
     },
     sectionTitle: {
-        fontSize: 18,
+        fontSize: 15,
         fontWeight: 'bold',
-        marginVertical: 5,
         color: Colors.text.primary,
-        textAlign: 'center',
     },
     loaderContainer: {
         flex: 1,

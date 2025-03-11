@@ -32,7 +32,9 @@ const ProductItem = ({ product }: { product: IProduct }) => {
 
     return (
         <Pressable onPress={handleProductPress} style={({ pressed }) => [styles.productContainer, pressed && styles.pressed]}>
-            <Image source={{ uri: product.images[0] }} style={styles.image} />
+            {/* <Image source={{ uri: product.images[0] }} style={styles.image} /> */}
+            <Image source={require('@/src/pngs/das.png')} style={styles.image} />
+
 
             <View style={styles.details}>
                 <Text style={styles.brand}>{product.brand}</Text>
@@ -60,63 +62,65 @@ export default ProductItem;
 
 const styles = StyleSheet.create({
     productContainer: {
-        flexDirection: "row",
-        alignItems: "center",
-        backgroundColor: Colors.background.light,
-        borderRadius: 12,
+        flex: 1,
+        backgroundColor: Colors.colors.gray[100],
         margin: 5,
-        height: 85,
-        gap: 10
+        overflow: 'hidden',
+        elevation: 2,
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.2,
+        shadowRadius: 2,
     },
     pressed: {
         opacity: 0.75,
     },
     image: {
-        width: 150,
-        height: 85,
-        marginRight: 10,
-        borderTopLeftRadius: 10,
-        borderBottomLeftRadius: 10
+        width: '100%',
+        height: 150,
     },
     details: {
-        flex: 1,
-        height: 85
+        padding: 10,
     },
     brand: {
         fontSize: 10,
         color: Colors.text.secondary,
-        textTransform: "uppercase",
-        fontWeight: "500",
+        textTransform: 'uppercase',
+        fontWeight: 'bold',
+        marginBottom: 4,
     },
     name: {
-        fontWeight: "600",
+        fontWeight: '500',
         color: Colors.text.primary,
+        fontSize: 14,
     },
     priceRow: {
-        flexDirection: "row",
-        alignItems: "center",
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginBottom: 5,
     },
     price: {
-        fontWeight: "bold",
+        fontWeight: 'bold',
         color: Colors.status.success,
+        fontSize: 15,
     },
     originalPrice: {
-        textDecorationLine: "line-through",
+        textDecorationLine: 'line-through',
         color: Colors.text.secondary,
         marginLeft: 5,
     },
     ratingRow: {
-        flexDirection: "row",
-        alignItems: "center",
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginBottom: 5,
     },
     reviewCount: {
-        fontSize: 12,
+        fontSize: 10,
         color: Colors.text.secondary,
         marginLeft: 6,
     },
     stock: {
-        fontSize: 13,
-        fontWeight: "600",
+        fontSize: 10,
+        fontWeight: '600',
     },
     inStock: {
         color: Colors.status.success,

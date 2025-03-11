@@ -10,7 +10,9 @@ interface CategoryListProps {
 const CategoryList: React.FC<CategoryListProps> = ({ categories }) => {
     const renderItem = ({ item }: { item: ICategory }) => (
         <View style={styles.item}>
-            <Image source={{ uri: item.imageUrl }} style={styles.image} />
+            {/* <Image source={{ uri: item.imageUrl }} style={styles.image} /> */}
+            <Image source={require('@/src/pngs/das.png')} style={styles.image} />
+
             <Text style={styles.title}>{item.name}</Text>
         </View>
     );
@@ -22,19 +24,15 @@ const CategoryList: React.FC<CategoryListProps> = ({ categories }) => {
             keyExtractor={(item) => item._id}
             horizontal
             showsHorizontalScrollIndicator={false}
-            contentContainerStyle={styles.listContainer}
         />
     );
 };
 
 const styles = StyleSheet.create({
-    listContainer: {
-        padding: 10
-    },
     item: {
         backgroundColor: Colors.background.light,
-        borderRadius: 10,
-        marginRight: 12,
+        borderRadius: 5,
+        margin: 2,
         alignItems: 'center',
         justifyContent: 'center',
         width: 100,
@@ -48,8 +46,8 @@ const styles = StyleSheet.create({
     image: {
         width: 100,
         height: 90,
-        borderTopLeftRadius: 10,
-        borderTopRightRadius: 10,
+        borderTopLeftRadius: 5,
+        borderTopRightRadius: 5,
     },
     title: {
         fontSize: 12,

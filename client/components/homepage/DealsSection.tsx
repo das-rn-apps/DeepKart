@@ -42,8 +42,7 @@ export default function DealsSection() {
 const styles = StyleSheet.create({
     section: {
         padding: 10,
-        marginBottom: 10,
-        backgroundColor: Colors.background.light,
+        backgroundColor: Colors.colors.red[100],
         elevation: 1,
         shadowColor: Colors.shadow,
         shadowOffset: { width: 0, height: 1 },
@@ -51,9 +50,8 @@ const styles = StyleSheet.create({
         shadowRadius: 1,
     },
     sectionTitle: {
-        fontSize: 20,
+        fontSize: 15,
         fontWeight: 'bold',
-        marginBottom: 10,
         color: Colors.text.primary,
     },
 });

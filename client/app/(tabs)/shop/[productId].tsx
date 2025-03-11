@@ -14,6 +14,7 @@ import { getProductById } from "@/src/services/productService";
 import { IProduct } from "@/src/utils/types";
 import { Colors } from "@/src/utils/Colors";
 import { FontAwesome } from "@expo/vector-icons";
+import Footer from "@/components/homepage/Footer";
 
 const { width: screenWidth } = Dimensions.get("window");
 
@@ -56,66 +57,70 @@ export default function ProductDetailsScreen() {
     return (
         <ScrollView style={styles.container}>
             {/* Image Carousel */}
-            <View style={styles.carouselContainer}>
-                <FlatList
-                    data={product.images}
-                    horizontal
-                    pagingEnabled
-                    showsHorizontalScrollIndicator={false}
-                    keyExtractor={(item, index) => index.toString()}
-                    renderItem={({ item }) => (
-                        <Image source={{ uri: item }} style={styles.image} />
-                    )}
-                />
-            </View>
+            <FlatList
+                data={product.images}
+                horizontal
+                pagingEnabled
+                showsHorizontalScrollIndicator={false}
+                keyExtractor={(item, index) => index.toString()}
+                renderItem={({ item }) => (
+                    // <Image source={{ uri: item }} style={styles.image} />
+                    <Image source={require('@/src/pngs/das.png')} style={styles.image} />
+
+                )}
+            />
 
             {/* Title & Brand */}
-            <Text style={styles.title}>{product.name}</Text>
-            <Text style={styles.brand}>{product.brand}</Text>
+            <View style={{ marginHorizontal: 16 }}>
 
-            {/* Price Section */}
-            <View style={styles.priceRow}>
-                <Text style={styles.price}>₹{product.discountedPrice ?? product.price}</Text>
-                {product.discountedPrice && (
-                    <Text style={styles.originalPrice}>₹{product.price}</Text>
-                )}
-            </View>
+                <Text style={styles.title}>{product.name}</Text>
+                <Text style={styles.brand}>{product.brand}</Text>
 
-            {/* Rating Row */}
-            <View style={styles.ratingRow}>
-                <FontAwesome name="star" size={16} color={Colors.status.warning} />
-                <Text style={styles.rating}>{product.ratings.toFixed(1)}</Text>
-                <Text style={styles.reviewCount}>
-                    ({Array.isArray(product.reviews) ? product.reviews.length : "No"} Reviews)
-                </Text>
-            </View>
-
-            {/* Stock Information */}
-            <View style={[styles.stockBadge, product.stock > 0 ? styles.inStock : styles.outOfStock]}>
-                <Text style={styles.stockText}>
-                    {product.stock > 0 ? "In Stock" : "Out of Stock"}
-                </Text>
-            </View>
-
-            {/* Description */}
-            <Text style={styles.description}>{product.description}</Text>
-
-            {/* Attributes */}
-            <View style={styles.attributesContainer}>
-                <Text style={styles.attributesTitle}>Product Details:</Text>
-                {Object.entries(product.attributes).map(([key, value]) => (
-                    <View key={key} style={styles.attributeRow}>
-                        <Text style={styles.attributeKey}>{key}:</Text>
-                        <Text style={styles.attributeValue}>{value}</Text>
+                {/* Price & Stock */}
+                <View style={styles.card}>
+                    <View style={styles.priceRow}>
+                        <Text style={styles.price}>₹{product.discountedPrice ?? product.price}</Text>
+                        {product.discountedPrice && (
+                            <Text style={styles.originalPrice}>₹{product.price}</Text>
+                        )}
                     </View>
-                ))}
+                    <Text style={[styles.stockText, product.stock > 0 ? styles.inStock : styles.outOfStock]}>
+                        {product.stock > 0 ? "In Stock" : "Out of Stock"}
+                    </Text>
+                </View>
+
+                {/* Rating & Reviews */}
+                <View style={styles.ratingRow}>
+                    <FontAwesome name="star" size={16} color={Colors.status.warning} />
+                    <Text style={styles.rating}>{product.ratings.toFixed(1)}</Text>
+                    <Text style={styles.reviewCount}>
+                        ({Array.isArray(product.reviews) ? product.reviews.length : "No"} Reviews)
+                    </Text>
+                </View>
+
+                {/* Description */}
+                <Text style={styles.description}>{product.description}</Text>
+
+                {/* Product Attributes */}
+                <View style={styles.attributesContainer}>
+                    <Text style={styles.attributesTitle}>Product Details:</Text>
+                    {Object.entries(product.attributes).map(([key, value], index) => (
+                        <View key={key} style={styles.attributeRow}>
+                            <Text style={styles.attributeSlNo}>{index + 1}.</Text>
+                            <Text style={styles.attributeKey}>{key}:</Text>
+                            <Text style={styles.attributeValue}>{value}</Text>
+                        </View>
+                    ))}
+                </View>
+
+                {/* Metadata */}
+                <Text style={styles.metaText}>Category: {product.category}</Text>
+                <Text style={styles.metaText}>
+                    Added on: {new Date(product.createdAt).toDateString()}
+                </Text>
             </View>
 
-            {/* Metadata */}
-            <Text style={styles.metaText}>Category: {product.category}</Text>
-            <Text style={styles.metaText}>
-                Added on: {new Date(product.createdAt).toDateString()}
-            </Text>
+            <Footer />
         </ScrollView>
     );
 }
@@ -124,7 +129,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: Colors.background.light,
-        padding: 16,
+        paddingBottom: 20,
     },
     loading: {
         flex: 1,
@@ -137,33 +142,30 @@ const styles = StyleSheet.create({
         textAlign: "center",
         marginTop: 20,
     },
-    carouselContainer: {
-        height: 300,
-        width: screenWidth - 32,
-        borderRadius: 10,
-        overflow: "hidden",
-    },
     image: {
-        width: screenWidth - 32,
-        height: 300,
+        width: screenWidth,
+        height: 320,
         resizeMode: "cover",
-        backgroundColor: Colors.background.dark,
     },
     title: {
-        fontSize: 22,
+        fontSize: 24,
         fontWeight: "bold",
         color: Colors.text.primary,
-        marginBottom: 4,
+        marginTop: 12,
     },
     brand: {
         fontSize: 14,
         color: Colors.text.secondary,
         marginBottom: 8,
     },
+    card: {
+        backgroundColor: Colors.colors.brown[100],
+        padding: 7,
+        borderRadius: 5,
+    },
     priceRow: {
         flexDirection: "row",
         alignItems: "center",
-        marginBottom: 8,
     },
     price: {
         fontSize: 22,
@@ -176,10 +178,24 @@ const styles = StyleSheet.create({
         color: Colors.text.secondary,
         marginLeft: 10,
     },
+    stockText: {
+        fontSize: 14,
+        fontWeight: "600",
+        color: Colors.text.white,
+        padding: 6,
+        borderRadius: 5,
+        alignSelf: "flex-start",
+    },
+    inStock: {
+        backgroundColor: Colors.status.success,
+    },
+    outOfStock: {
+        backgroundColor: Colors.status.error,
+    },
     ratingRow: {
         flexDirection: "row",
         alignItems: "center",
-        marginBottom: 8,
+        marginVertical: 8,
     },
     rating: {
         fontSize: 16,
@@ -192,55 +208,46 @@ const styles = StyleSheet.create({
         color: Colors.text.secondary,
         marginLeft: 6,
     },
-    stockBadge: {
-        paddingVertical: 6,
-        paddingHorizontal: 12,
-        borderRadius: 4,
-        alignSelf: "flex-start",
-        marginBottom: 8,
-    },
-    inStock: {
-        backgroundColor: Colors.status.success,
-    },
-    outOfStock: {
-        backgroundColor: Colors.status.error,
-    },
-    stockText: {
-        fontSize: 14,
-        fontWeight: "600",
-        color: Colors.text.white,
-    },
     description: {
         fontSize: 16,
         color: Colors.text.primary,
         lineHeight: 22,
-        marginBottom: 12,
+        marginVertical: 12,
     },
     attributesContainer: {
-        marginTop: 12,
-        padding: 10,
-        backgroundColor: Colors.background.dark,
-        borderRadius: 8,
+        backgroundColor: Colors.colors.cyan[100],
+        padding: 8,
+        borderRadius: 5,
+        borderWidth: 0.1,
     },
     attributesTitle: {
         fontSize: 16,
         fontWeight: "bold",
         color: Colors.text.primary,
-        marginBottom: 8,
+        textAlign: "center",
     },
     attributeRow: {
         flexDirection: "row",
-        justifyContent: "space-between",
-        marginBottom: 4,
+        alignItems: "center",
+        paddingVertical: 4,
+    },
+    attributeSlNo: {
+        fontSize: 14,
+        fontWeight: "600",
+        color: Colors.text.secondary,
+        marginRight: 6,
     },
     attributeKey: {
         fontSize: 14,
-        fontWeight: "500",
-        color: Colors.text.secondary,
+        fontWeight: "600",
+        textTransform: "capitalize",
+        flex: 1,
     },
     attributeValue: {
         fontSize: 14,
-        color: Colors.text.primary,
+        color: Colors.primary,
+        flex: 1,
+        textAlign: "right",
     },
     metaText: {
         fontSize: 14,

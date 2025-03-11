@@ -42,7 +42,6 @@ export default function FeaturedProductsSection() {
 const styles = StyleSheet.create({
     section: {
         padding: 10,
-        marginBottom: 10,
         backgroundColor: Colors.colors.orange[100],
     },
     sectionTitle: {

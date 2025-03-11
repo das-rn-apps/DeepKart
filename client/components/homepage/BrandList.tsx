@@ -14,7 +14,9 @@ interface BrandListProps {
 const BrandList: React.FC<BrandListProps> = ({ brands }) => {
     const renderItem = ({ item }: { item: Brand }) => (
         <View style={styles.item}>
-            <Image source={{ uri: item.logo }} style={styles.logo} />
+            {/* <Image source={{ uri: item.logo }} style={styles.logo} /> */}
+            <Image source={require('@/src/pngs/das.png')} style={styles.logo} />
+
         </View>
     );
 

@@ -10,7 +10,7 @@ export default function Header() {
         <View style={styles.header}>
             <Text style={styles.logo}>DeepKart</Text>
 
-            <TouchableOpacity style={styles.iconButton} onPress={() => router.push('/profile')}>
+            <TouchableOpacity style={styles.iconButton} onPress={() => router.push('/(extra)/profile')}>
                 <Image source={require('@/src/pngs/das.png')} style={styles.icon} />
             </TouchableOpacity>
         </View>

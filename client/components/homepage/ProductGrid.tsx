@@ -11,7 +11,9 @@ interface ProductGridProps {
 const ProductGrid: React.FC<ProductGridProps> = ({ products }) => {
     const renderItem = ({ item }: { item: IProduct }) => (
         <View style={styles.item}>
-            <Image source={{ uri: item.images[0] }} style={styles.image} />
+            {/* <Image source={{ uri: item.images[0] }} style={styles.image} /> */}
+            <Image source={require('@/src/pngs/das.png')} style={styles.image} />
+
             <Text style={styles.title}>{item.name}</Text>
             <Text style={styles.price}>₹{item.price}</Text>
         </View>
@@ -31,7 +33,7 @@ const styles = StyleSheet.create({
     item: {
         flex: 1,
         backgroundColor: Colors.background.light,
-        borderRadius: 8,
+        borderRadius: 5,
         margin: 5,
         alignItems: 'center',
         justifyContent: 'center',
@@ -39,8 +41,8 @@ const styles = StyleSheet.create({
     image: {
         width: 120,
         height: 120,
-        borderTopLeftRadius: 8,
-        borderTopRightRadius: 8,
+        borderTopLeftRadius: 5,
+        borderTopRightRadius: 5,
     },
     title: {
         fontSize: 12,
