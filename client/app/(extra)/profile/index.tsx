@@ -25,10 +25,10 @@ export default function ProfileScreen() {
 
             {/* Profile Actions */}
             <View style={styles.menu}>
-                <MenuItem icon="edit" text="Update Profile" link="/profile" />
-                <MenuItem icon="shopping-bag" text="My Orders" link="/profile" />
+                <MenuItem icon="edit" text="Update Profile" link="/profile/addresses" />
+                <MenuItem icon="shopping-bag" text="My Orders" link="/profile/addresses" />
                 <MenuItem icon="map-marker" text="Saved Addresses" link="/profile/addresses" />
-                <MenuItem icon="cog" text="Settings" link="/profile" />
+                <MenuItem icon="cog" text="Settings" link="/profile/addresses" />
             </View>
 
             {/* Logout Button */}

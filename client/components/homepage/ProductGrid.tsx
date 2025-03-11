@@ -2,6 +2,7 @@ import { Colors } from '@/src/utils/Colors';
 import { IProduct } from '@/src/utils/types';
 import React from 'react';
 import { View, Text, StyleSheet, Image, FlatList } from 'react-native';
+import ProductItem from '../ProductItem';
 
 
 interface ProductGridProps {
@@ -22,7 +23,7 @@ const ProductGrid: React.FC<ProductGridProps> = ({ products }) => {
     return (
         <FlatList
             data={products}
-            renderItem={renderItem}
+            renderItem={({ item }) => <ProductItem product={item} />}
             keyExtractor={(item) => item._id}
             horizontal
         />

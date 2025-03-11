@@ -16,6 +16,8 @@ export const authenticate = (
   next: NextFunction
 ): void => {
   const token = req.header("Authorization")?.replace("Bearer ", "");
+  // console.log(token);
+
   if (!token) {
     res.status(401).json({ message: "Access denied. No token provided." });
     return;
@@ -29,7 +31,7 @@ export const authenticate = (
     const decoded = jwt.verify(token, process.env.JWT_SECRET) as JwtPayload & {
       id: string;
     };
-    req.user = decoded; // Now `req.user.id` is guaranteed
+    req.user = decoded;
     next();
   } catch (error) {
     res.status(401).json({ message: "Invalid token." });

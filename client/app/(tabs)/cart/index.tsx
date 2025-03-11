@@ -1,11 +1,15 @@
+import Footer from '@/components/homepage/Footer';
+import Header from '@/components/homepage/Header';
+import { Colors } from '@/src/utils/Colors';
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
 export default function CartScreen() {
     return (
         <View style={styles.container}>
+            <Header />
             <Text>Your Cart</Text>
-            {/* Implement cart items, total, checkout button, etc. */}
+            <Footer />
         </View>
     );
 }
@@ -13,8 +17,6 @@ export default function CartScreen() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        padding: 16,
-        justifyContent: 'center',
-        alignItems: 'center',
+        backgroundColor: Colors.colors.red[100]
     },
 });

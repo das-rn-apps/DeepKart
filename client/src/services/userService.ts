@@ -1,4 +1,5 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { getToken } from "./getToken";
 const API_URL = process.env.EXPO_PUBLIC_BACKEND_URL; // Replace with your API URL
 
 export const getAddresses = async () => {
@@ -9,7 +10,6 @@ export const getAddresses = async () => {
         Authorization: `Bearer ${token}`,
       },
     });
-
     if (!response.ok) {
       throw new Error("Failed to fetch addresses");
     }
@@ -39,12 +39,4 @@ export const getAddressById = async (addressId: any) => {
     console.error("Error fetching address:", error);
     throw error; // Rethrow the error to be handled by the component
   }
-};
-
-const getToken = async () => {
-  const token = await AsyncStorage.getItem("authToken");
-  if (!token) {
-    throw new Error("No token found");
-  }
-  return token;
 };

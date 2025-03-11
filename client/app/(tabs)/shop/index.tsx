@@ -6,6 +6,7 @@ import { IProduct } from '@/src/utils/types';
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, FlatList, ActivityIndicator } from 'react-native';
 import { Colors } from '@/src/utils/Colors';
+import Footer from '@/components/homepage/Footer';
 
 export default function ShopScreen() {
     const [products, setProducts] = useState<IProduct[]>([]);
@@ -41,6 +42,7 @@ export default function ShopScreen() {
                 style={styles.container}
                 numColumns={2}
             />
+            <Footer />
         </View>
     );
 }

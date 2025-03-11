@@ -49,7 +49,6 @@ const ProductItem = ({ product }: { product: IProduct }) => {
                     {renderStars(product.ratings)}
                     <Text style={styles.reviewCount}>({product.reviews})</Text>
                 </View>
-
                 <Text style={[styles.stock, product.stock > 0 ? styles.inStock : styles.outOfStock]}>
                     {product.stock > 0 ? "In Stock" : "Out of Stock"}
                 </Text>
@@ -75,43 +74,43 @@ const styles = StyleSheet.create({
         opacity: 0.75,
     },
     image: {
-        width: '100%',
+        width: "100%",
+        minWidth: 150,
         height: 150,
-    },
+    }
+    ,
     details: {
         padding: 10,
     },
     brand: {
-        fontSize: 10,
+        fontSize: 7,
         color: Colors.text.secondary,
         textTransform: 'uppercase',
         fontWeight: 'bold',
-        marginBottom: 4,
     },
     name: {
         fontWeight: '500',
         color: Colors.text.primary,
-        fontSize: 14,
+        fontSize: 12,
     },
     priceRow: {
         flexDirection: 'row',
         alignItems: 'center',
-        marginBottom: 5,
     },
     price: {
         fontWeight: 'bold',
         color: Colors.status.success,
-        fontSize: 15,
+        fontSize: 13,
     },
     originalPrice: {
         textDecorationLine: 'line-through',
         color: Colors.text.secondary,
-        marginLeft: 5,
+        marginLeft: 10,
+        fontSize: 13
     },
     ratingRow: {
         flexDirection: 'row',
         alignItems: 'center',
-        marginBottom: 5,
     },
     reviewCount: {
         fontSize: 10,

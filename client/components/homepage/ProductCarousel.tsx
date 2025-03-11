@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 16,
         fontWeight: 'bold',
-        // color: Colors.text.white,
+        color: Colors.text.white,
         textAlign: 'center',
     },
 });

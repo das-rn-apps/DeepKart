@@ -8,6 +8,7 @@ import {
     ActivityIndicator,
     FlatList,
     Dimensions,
+    Alert,
 } from "react-native";
 import { useLocalSearchParams } from "expo-router";
 import { getProductById } from "@/src/services/productService";
@@ -15,6 +16,7 @@ import { IProduct } from "@/src/utils/types";
 import { Colors } from "@/src/utils/Colors";
 import { FontAwesome } from "@expo/vector-icons";
 import Footer from "@/components/homepage/Footer";
+import ProductActions from "@/components/ProductActions";
 
 const { width: screenWidth } = Dimensions.get("window");
 
@@ -26,7 +28,7 @@ export default function ProductDetailsScreen() {
     useEffect(() => {
         const fetchProduct = async () => {
             try {
-                const data = await getProductById(productId);
+                const data = await getProductById(productId as string);
                 setProduct(data);
             } catch (error) {
                 console.error("Error fetching product:", error);
@@ -52,6 +54,17 @@ export default function ProductDetailsScreen() {
                 <Text style={styles.notFound}>Product not found.</Text>
             </View>
         );
+    }
+
+    function handleAddToCart(): void {
+        console.log("handleAddToCart")
+        Alert.alert("AddToCart", "handleAddToCart")
+    }
+
+    function handleBuyNow(): void {
+        console.log("handleBuyNow")
+        Alert.alert("BuyNow", "handleBuyNow")
+
     }
 
     return (
@@ -119,8 +132,10 @@ export default function ProductDetailsScreen() {
                     Added on: {new Date(product.createdAt).toDateString()}
                 </Text>
             </View>
+            <ProductActions onAddToCart={handleAddToCart} onBuyNow={handleBuyNow} />
 
             <Footer />
+
         </ScrollView>
     );
 }
