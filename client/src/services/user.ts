@@ -8,7 +8,9 @@ export const getAddresses = async () => {
       headers: {
         Authorization: `Bearer ${token}`,
       },
+      method: "GET",
     });
+
     if (!response.ok) {
       throw new Error("Failed to fetch addresses");
     }
@@ -16,7 +18,7 @@ export const getAddresses = async () => {
     return response.json();
   } catch (error) {
     console.error("Error fetching addresses:", error);
-    throw error; // Rethrow the error to be handled by the component
+    throw error;
   }
 };
 

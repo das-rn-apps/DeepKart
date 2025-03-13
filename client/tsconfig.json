@@ -13,6 +13,8 @@
   "include": [
     "**/*.ts",
     "**/*.tsx",
+    "**/*.png",
+    "**/*.mp3",
     ".expo/types/**/*.ts",
     "env.d.ts",
     "expo-env.d.ts"

@@ -1,9 +1,11 @@
 import { ActivityIndicator, FlatList, Text, View, Alert } from 'react-native';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
+import { useFocusEffect } from '@react-navigation/native'; // Import useFocusEffect
 import { ICartItem } from '@/src/utils/types';
-import { getCart, removeCartItem } from '@/src/services/cart';
+import { getCart, removeCartItem, updateCartItemQuantity } from '@/src/services/cart';
 import CartItem from './CartItem';
 import CartSummary from './CartSummary';
+import { router } from 'expo-router';
 
 const Cart = () => {
     const [cartItems, setCartItems] = useState<ICartItem[]>([]);
@@ -20,9 +22,12 @@ const Cart = () => {
         }
     };
 
-    useEffect(() => {
-        fetchCart();
-    }, []);
+    // Use useFocusEffect to re-fetch cart data when the screen comes into focus
+    useFocusEffect(
+        useCallback(() => {
+            fetchCart();
+        }, [])
+    );
 
     const handleRemoveItem = async (productId: string) => {
         Alert.alert(
@@ -48,6 +53,16 @@ const Cart = () => {
         );
     };
 
+    const handleUpdateItem = async (productId: string, quantity: number) => {
+        try {
+            await updateCartItemQuantity(productId, quantity);
+            await fetchCart(); // Re-fetch cart data after updating quantity
+        } catch (error) {
+            console.error('Error updating quantity:', error);
+            Alert.alert('Error', 'Failed to update quantity. Please try again.');
+        }
+    };
+
     const total = cartItems.reduce((sum, item) => sum + item.productId.price * item.quantity, 0);
 
     if (loading) {
@@ -69,11 +84,11 @@ const Cart = () => {
                     data={cartItems}
                     keyExtractor={(item) => item._id}
                     renderItem={({ item }) => (
-                        <CartItem item={item} onRemove={handleRemoveItem} />
+                        <CartItem item={item} onRemove={handleRemoveItem} onUpdateQuantity={handleUpdateItem} />
                     )}
                 />
             )}
-            <CartSummary total={total} onCheckout={() => console.log('Proceeding to checkout...')} />
+            <CartSummary total={total} onCheckout={() => router.push("/cart/placeOrder")} />
         </>
     );
 };

@@ -17,11 +17,12 @@ import { Colors } from "@/src/utils/Colors";
 import { FontAwesome } from "@expo/vector-icons";
 import Footer from "@/components/homepage/Footer";
 import ProductActions from "@/components/ProductActions";
+import { addCartItem } from "@/src/services/cart";
 
 const { width: screenWidth } = Dimensions.get("window");
 
 export default function ProductDetailsScreen() {
-    const { productId } = useLocalSearchParams();
+    const { productId } = useLocalSearchParams<{ productId: string }>();
     const [product, setProduct] = useState<IProduct | null>(null);
     const [loading, setLoading] = useState(true);
 
@@ -56,16 +57,24 @@ export default function ProductDetailsScreen() {
         );
     }
 
-    function handleAddToCart(): void {
-        console.log("handleAddToCart")
-        Alert.alert("AddToCart", "handleAddToCart")
-    }
+    const handleAddToCart = async () => {
+        try {
+            await addCartItem(productId);
+        } catch (error) {
+            console.error('Error adding item:', error);
+            Alert.alert('Error', 'Failed to adding item. Please try again.');
+        }
+    };
+    const handleBuyNow = async () => {
+        try {
+            // await addCartItem(productId);
+            console.log("Buyingggggg")
+        } catch (error) {
+            console.error('Error buy item:', error);
+            Alert.alert('Error', 'Failed to buy item. Please try again.');
+        }
+    };
 
-    function handleBuyNow(): void {
-        console.log("handleBuyNow")
-        Alert.alert("BuyNow", "handleBuyNow")
-
-    }
 
     return (
         <ScrollView style={styles.container}>
