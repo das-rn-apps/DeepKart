@@ -3,7 +3,7 @@ import { FlatList, View, Text, StyleSheet, ActivityIndicator } from 'react-nativ
 import { Colors } from '@/src/utils/Colors'; // Adjust path as needed
 import { IOrder } from '@/src/utils/types'; // Adjust path and type as needed
 import OrderItem from '@/components/OrderItem';
-import { getOrders } from '@/src/services/orderService';
+import { getOrders } from '@/src/services/order';
 import Header from '@/components/homepage/Header';
 import Footer from '@/components/homepage/Footer';
 

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { View, ActivityIndicator } from 'react-native';
 import ProductCarousel from './ProductCarousel';
 import { IProduct } from '@/src/utils/types';
-import { getProducts } from '@/src/services/productService';
+import { getProducts } from '@/src/services/product';
 
 export default function CarouselSection() {
     const [products, setProducts] = useState<IProduct[]>([]);

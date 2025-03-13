@@ -1,4 +1,3 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { getToken } from "./getToken";
 const API_URL = process.env.EXPO_PUBLIC_BACKEND_URL; // Replace with your API URL
 

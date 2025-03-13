@@ -1,4 +1,4 @@
-import { Slot, useRouter, useSegments } from 'expo-router';
+import { Slot, useRouter } from 'expo-router';
 import React, { useEffect, useState } from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -25,9 +25,9 @@ export default function RootLayout() {
   useEffect(() => {
     if (isAuthenticated !== null) {
       if (isAuthenticated) {
-        router.replace('/home'); // Relative path
+        router.replace('/home');
       } else if (!isAuthenticated) {
-        router.replace('/login'); // Relative path
+        router.replace('/login');
       }
     }
   }, [isAuthenticated]);

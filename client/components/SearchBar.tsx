@@ -34,16 +34,19 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         alignItems: "center",
         borderRadius: 10,
-        margin: 10
+        padding: 5,
+        backgroundColor: Colors.colors.cyan[100]
     },
     searchBar: {
         flex: 1,
         height: 45,
         paddingHorizontal: 12,
-        backgroundColor: Colors.colors.indigo[200],
+        backgroundColor: Colors.colors.indigo[100],
         borderRadius: 15,
         fontSize: 16,
         color: Colors.text.primary,
+        borderColor: Colors.colors.indigo[300],
+        borderWidth: 1
     },
     searchButton: {
         backgroundColor: Colors.colors.blue[400],

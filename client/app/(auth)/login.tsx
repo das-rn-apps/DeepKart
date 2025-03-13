@@ -13,11 +13,11 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useRouter } from 'expo-router';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Colors } from '@/src/utils/Colors';
-import { loginUser } from '@/src/services/authService';
+import { loginUser } from '@/src/services/auth';
 
 export default function LoginScreen() {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const [email, setEmail] = useState('user2@gmail.com');
+    const [password, setPassword] = useState('Qwertyuiop');
     const [loading, setLoading] = useState(false);
     const router = useRouter();
 

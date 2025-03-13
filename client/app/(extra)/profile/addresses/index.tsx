@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, FlatList, ActivityIndicator } from 'react-native';
 import { Link } from 'expo-router';
-import { getAddresses } from '@/src/services/userService';
+import { getAddresses } from '@/src/services/user';
 import { IAddress } from '@/src/utils/types';
 import { Colors } from '@/src/utils/Colors';
 

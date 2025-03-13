@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet, ActivityIndicator } from "react-native";
 import { useLocalSearchParams } from "expo-router";
-import { getAddressById } from "@/src/services/userService";
+import { getAddressById } from "@/src/services/user";
 import { IAddress } from "@/src/utils/types";
 import { Colors } from "@/src/utils/Colors";
 

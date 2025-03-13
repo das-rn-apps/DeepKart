@@ -12,7 +12,7 @@ import {
 import { useRouter } from 'expo-router';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Colors } from '@/src/utils/Colors';
-import { registerUser } from '@/src/services/authService';
+import { registerUser } from '@/src/services/auth';
 
 export default function RegisterScreen() {
     const [username, setUsername] = useState('');

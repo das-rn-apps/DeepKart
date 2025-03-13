@@ -1,60 +1,49 @@
+import { FlatList, StyleSheet, Text, View } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import CategoryCard from '@/components/category/CategoryCard';
+import { ICategory } from '@/src/utils/types';
+import { getCategories } from '@/src/services/category';
 import Header from '@/components/homepage/Header';
-import SearchBar from '@/components/SearchBar';
-import ProductItem from '@/components/ProductItem';
-import { getProducts } from '@/src/services/productService';
-import { IProduct } from '@/src/utils/types';
-import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, FlatList, ActivityIndicator } from 'react-native';
 import { Colors } from '@/src/utils/Colors';
-import Footer from '@/components/homepage/Footer';
 
-export default function ShopScreen() {
-    const [products, setProducts] = useState<IProduct[]>([]);
+
+export default function CategoriesScreen() {
+    const [categories, setCategories] = useState<ICategory[]>([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        const fetchProducts = async () => {
+        const fetchCategories = async () => {
             try {
-                const data = await getProducts();
-                setProducts(data);
+                const data = await getCategories();
+                setCategories(data);
             } catch (error) {
-                console.error('Error fetching products:', error);
+                console.error('Error fetching categories:', error);
             } finally {
                 setLoading(false);
             }
         };
-
-        fetchProducts();
+        fetchCategories();
     }, []);
-
-    if (loading) {
-        return <View style={styles.loading}><ActivityIndicator size="large" /></View>;
-    }
-
     return (
         <View style={styles.container}>
             <Header />
-            <SearchBar />
             <FlatList
-                data={products}
-                renderItem={({ item }) => <ProductItem product={item} />}
+                data={categories}
+                renderItem={({ item }) => <CategoryCard category={item} />}
                 keyExtractor={(item) => item._id}
-                style={styles.container}
-                numColumns={2}
+                numColumns={4}
+                contentContainerStyle={styles.grid}
             />
-            <Footer />
         </View>
     );
 }
 
 const styles = StyleSheet.create({
     container: {
-        // flex: 1,
-        backgroundColor: Colors.colors.cyan[100]
-    },
-    loading: {
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
+        backgroundColor: Colors.background.light
+    },
+    grid: {
+        justifyContent: 'space-between',
     },
 });

@@ -5,8 +5,8 @@ import { Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from "expo-linear-gradient";
 import { Colors } from '@/src/utils/Colors';
 
-const screens = ['home', 'shop', 'cart', 'my'];
-const icons: Record<string, any> = { home: 'home', shop: 'search', cart: 'cart', my: 'person' };
+const screens = ['home', 'shop', 'cart', 'myOrders'];
+const icons: Record<string, any> = { home: 'home', shop: 'search', cart: 'cart', myOrders: 'person' };
 
 const CustomTabBar = ({ state, navigation }: any) => (
   <View style={styles.tabBar}>

@@ -9,10 +9,12 @@ import DealsSection from '@/components/homepage/DealsSection';
 import RecommendedSection from '@/components/homepage/RecommendedSection';
 import Header from '@/components/homepage/Header';
 import Footer from '@/components/homepage/Footer';
+import SearchBar from '@/components/SearchBar';
 
 interface HomeItem {
     type:
     | 'header'
+    | 'search'
     | 'carousel'
     | 'categories'
     | 'featuredProducts'
@@ -25,6 +27,7 @@ interface HomeItem {
 export default function HomeScreen() {
     const data: HomeItem[] = [
         { type: 'header' },
+        { type: 'search' },
         { type: 'carousel' },
         { type: 'categories' },
         { type: 'featuredProducts' },
@@ -38,6 +41,8 @@ export default function HomeScreen() {
         switch (item.type) {
             case 'header':
                 return <Header />;
+            case 'search':
+                return <SearchBar />;
             case 'carousel':
                 return <CarouselSection />;
             case 'categories':

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { View, ActivityIndicator, Text, StyleSheet } from 'react-native';
 import ProductGrid from './ProductGrid';
 import { IProduct } from '@/src/utils/types';
-import { getProducts } from '@/src/services/productService';
+import { getProducts } from '@/src/services/product';
 import { Colors } from '@/src/utils/Colors';
 
 export default function DealsSection() {

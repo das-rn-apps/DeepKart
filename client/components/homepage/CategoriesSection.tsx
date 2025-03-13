@@ -3,7 +3,7 @@ import { View, ActivityIndicator, Text, StyleSheet } from 'react-native';
 import CategoryList from './CategoryList';
 import { Colors } from '@/src/utils/Colors';
 import { ICategory } from '@/src/utils/types';
-import { getCategories } from '@/src/services/categoryService';
+import { getCategories } from '@/src/services/category';
 
 export default function CategoriesSection() {
     const [categories, setCategories] = useState<ICategory[]>([]);

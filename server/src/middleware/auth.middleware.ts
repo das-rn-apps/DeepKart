@@ -16,7 +16,6 @@ export const authenticate = (
   next: NextFunction
 ): void => {
   const token = req.header("Authorization")?.replace("Bearer ", "");
-  // console.log(token);
 
   if (!token) {
     res.status(401).json({ message: "Access denied. No token provided." });
@@ -32,8 +31,10 @@ export const authenticate = (
       id: string;
     };
     req.user = decoded;
+
     next();
   } catch (error) {
+    console.log("Invalid token.");
     res.status(401).json({ message: "Invalid token." });
   }
 };
