@@ -14,7 +14,7 @@ const Cart = () => {
     const fetchCart = async () => {
         try {
             const data = await getCart();
-            setCartItems(data);
+            setCartItems(Array.isArray(data) ? data : []);
         } catch (error) {
             console.error('Error fetching cart:', error);
         } finally {
@@ -22,7 +22,6 @@ const Cart = () => {
         }
     };
 
-    // Use useFocusEffect to re-fetch cart data when the screen comes into focus
     useFocusEffect(
         useCallback(() => {
             fetchCart();
@@ -63,7 +62,7 @@ const Cart = () => {
         }
     };
 
-    const total = cartItems.reduce((sum, item) => sum + item.productId.price * item.quantity, 0);
+    const total = cartItems?.reduce((sum, item) => sum + item.productId.price * item.quantity, 0);
 
     if (loading) {
         return (

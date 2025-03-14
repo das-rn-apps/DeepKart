@@ -4,7 +4,7 @@
     "slug": "deepKart",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./src/pngs/das.png",
+    "icon": "./src/pngs/dasNoBackground.png",
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
@@ -13,10 +13,10 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./src/pngs/das.png",
+        "foregroundImage": "./src/pngs/dasNoBackground.png",
         "backgroundColor": "#fff"
       },
-      "package": "com.deepak7.dasFinance"
+      "package": "com.deepak7.deepKart"
     },
     "bundler": "metro",
     "output": "static",
@@ -41,7 +41,7 @@
         "origin": false
       },
       "eas": {
-        "projectId": "a9bb2918-1ef2-4437-96a4-a56c337f2268"
+        "projectId": "d7717b2a-9971-4cdd-8742-735ed5242924"
       }
     }
   }

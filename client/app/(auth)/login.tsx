@@ -1,14 +1,5 @@
 import React, { useState } from 'react';
-import {
-    View,
-    Text,
-    TextInput,
-    TouchableOpacity,
-    ActivityIndicator,
-    Alert,
-    ImageBackground,
-    StyleSheet,
-} from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, ActivityIndicator, Alert, StyleSheet } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useRouter } from 'expo-router';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -16,8 +7,8 @@ import { Colors } from '@/src/utils/Colors';
 import { loginUser } from '@/src/services/auth';
 
 export default function LoginScreen() {
-    const [email, setEmail] = useState('user2@gmail.com');
-    const [password, setPassword] = useState('Qwertyuiop');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
     const router = useRouter();
 
@@ -34,49 +25,34 @@ export default function LoginScreen() {
         }
     };
 
+    const fillDefaultUser = () => {
+        setEmail("user2@gmail.com");
+        setPassword("Qwertyuiop");
+    };
+
     return (
-        <ImageBackground source={require('@/src/pngs/das.png')} style={styles.background}>
-            <LinearGradient colors={['rgba(0, 0, 0, 0.651)', 'rgba(125, 246, 97, 0.8)']} style={styles.overlay}>
-                <View style={styles.container}>
-                    <Text style={styles.title}>Welcome Back 👋</Text>
-
-                    <TextInput
-                        style={styles.input}
-                        placeholder="Email"
-                        placeholderTextColor={Colors.text.secondary}
-                        value={email}
-                        onChangeText={setEmail}
-                        keyboardType="email-address"
-                        autoCapitalize="none"
-                    />
-                    <TextInput
-                        style={styles.input}
-                        placeholder="Password"
-                        placeholderTextColor={Colors.text.secondary}
-                        value={password}
-                        onChangeText={setPassword}
-                        secureTextEntry
-                    />
-
-                    <TouchableOpacity onPress={handleLogin} style={styles.button} disabled={loading}>
-                        <LinearGradient colors={[Colors.primary, Colors.accent]} style={styles.gradientButton}>
-                            {loading ? <ActivityIndicator color={Colors.text.white} /> : <Text style={styles.buttonText}>Login</Text>}
-                        </LinearGradient>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity onPress={() => router.push('/register')}>
-                        <Text style={styles.registerText}>
-                            Don't have an account? <Text style={styles.registerLink}>Sign Up</Text>
-                        </Text>
-                    </TouchableOpacity>
-                </View>
-            </LinearGradient>
-        </ImageBackground>
+        <LinearGradient colors={['rgba(0, 0, 0, 0.651)', 'rgba(155, 246, 135, 0.547)']} style={styles.overlay}>
+            <View style={styles.container}>
+                <Text style={styles.title}>Welcome Back 👋</Text>
+                <TextInput style={styles.input} placeholder="Email" placeholderTextColor={Colors.text.secondary} value={email} onChangeText={setEmail} keyboardType="email-address" autoCapitalize="none" />
+                <TextInput style={styles.input} placeholder="Password" placeholderTextColor={Colors.text.secondary} value={password} onChangeText={setPassword} secureTextEntry />
+                <TouchableOpacity onPress={handleLogin} style={styles.button} disabled={loading}>
+                    <LinearGradient colors={[Colors.primary, Colors.accent]} style={styles.gradientButton}>
+                        {loading ? <ActivityIndicator color={Colors.text.white} /> : <Text style={styles.buttonText}>Login</Text>}
+                    </LinearGradient>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => router.push('/register')}>
+                    <Text style={styles.registerText}>Don't have an account? <Text style={styles.registerLink}>Sign Up</Text></Text>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={fillDefaultUser} style={styles.defaultUserButton}>
+                    <Text style={styles.defaultUserText}>Use Default User</Text>
+                </TouchableOpacity>
+            </View>
+        </LinearGradient>
     );
 }
 
 const styles = StyleSheet.create({
-    background: { flex: 1, justifyContent: 'center', alignItems: 'center' },
     overlay: { flex: 1, width: '100%', justifyContent: 'center', alignItems: 'center' },
     container: { width: '90%', padding: 20, borderRadius: 10, backgroundColor: 'rgba(255,255,255,0.15)' },
     title: { fontSize: 24, fontWeight: 'bold', color: Colors.text.white, textAlign: 'center', marginBottom: 20 },
@@ -86,4 +62,6 @@ const styles = StyleSheet.create({
     buttonText: { color: Colors.text.white, fontSize: 18, fontWeight: 'bold' },
     registerText: { textAlign: 'center', fontSize: 14, color: Colors.text.white },
     registerLink: { color: Colors.accent, fontWeight: 'bold', fontSize: 15 },
+    defaultUserButton: { marginTop: 10, padding: 10, borderRadius: 10, backgroundColor: 'rgba(255, 255, 255, 0.2)', alignItems: 'center' },
+    defaultUserText: { color: Colors.text.white, fontSize: 14 },
 });
