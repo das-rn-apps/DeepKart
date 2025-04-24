@@ -25,8 +25,10 @@ export default function RootLayout() {
   useEffect(() => {
     if (isAuthenticated !== null) {
       if (isAuthenticated) {
+        console.log(process.env.EXPO_PUBLIC_BACKEND_URL)
         router.replace('/home');
       } else if (!isAuthenticated) {
+        console.log(process.env.EXPO_PUBLIC_BACKEND_URL)
         router.replace('/login');
       }
     }

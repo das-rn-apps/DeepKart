@@ -5,16 +5,24 @@
     "strict": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": [
-        "./*"
-      ]
-    }
+      "@/*": ["./*"]
+    },
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "moduleResolution": "node"
   },
   "include": [
     "**/*.ts",
     "**/*.tsx",
     "**/*.png",
     "**/*.mp3",
+    "**/*.json",
+    "**/*.jpg",
+    "**/*.gif",
+    "**/*.svg",
+    "**/*.css",
+    "**/*.scss",
     ".expo/types/**/*.ts",
     "env.d.ts",
     "expo-env.d.ts"

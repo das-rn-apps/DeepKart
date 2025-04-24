@@ -17,8 +17,10 @@ export default function RegisterScreen() {
 
     const handleRegister = async () => {
         setLoading(true);
+
         try {
             await registerUser(username, email, password, firstName, lastName, phoneNumber);
+            console.log(username, email, password, firstName, lastName, phoneNumber);
             router.push('/login');
         } catch (error: any) {
             Alert.alert('Registration Failed', error.message || 'An error occurred.');

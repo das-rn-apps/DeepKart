@@ -4,7 +4,7 @@
     "slug": "deepKart",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./src/pngs/dasNoBackground.png",
+    "icon": "./src/pngs/deepkart.png",
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
@@ -13,20 +13,20 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./src/pngs/dasNoBackground.png",
+        "foregroundImage": "./src/pngs/deepkart.png",
         "backgroundColor": "#fff"
       },
       "package": "com.deepak7.deepKart"
     },
     "bundler": "metro",
     "output": "static",
-    "favicon": "./src/pngs/das.png",
+    "favicon": "./src/pngs/dasNoBackground.png",
     "plugins": [
       "expo-router",
       [
         "expo-splash-screen",
         {
-          "image": "./src/pngs/das.png",
+          "image": "./src/pngs/deepkart.png",
           "imageWidth": 200,
           "resizeMode": "contain",
           "backgroundColor": "#fff"

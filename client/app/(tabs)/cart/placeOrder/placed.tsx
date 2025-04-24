@@ -22,7 +22,7 @@ const OrderSuccessScreen = () => {
 
         const playSound = async () => {
             try {
-                await soundObject.loadAsync(require('@/src/utils/orderPlaced.mp3')); // Replace with your sound file path
+                await soundObject.loadAsync(require('@/src/utils/orderPlaced.mp3'));
                 await soundObject.playAsync();
             } catch (error) {
                 console.error('Failed to play sound', error);
