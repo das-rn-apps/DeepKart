@@ -77,7 +77,6 @@ export const removeCartItem = async (productId: string) => {
     },
   });
   if (!response.ok) {
-    console.log("Failed to delete cart item", response.status);
     return [];
   }
   return response.json();

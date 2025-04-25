@@ -11,7 +11,6 @@ export const getOrders = async () => {
     },
   });
   if (!response.ok) {
-    console.log("Failed to fetch orders");
     return [];
   }
   return response.json();
@@ -20,7 +19,6 @@ export const getOrders = async () => {
 export const getOrderById = async (orderId: string) => {
   const response = await fetch(`${API_URL}/orders/${orderId}`);
   if (!response.ok) {
-    console.log("Failed to fetch orders");
     return null;
   }
   return response.json();

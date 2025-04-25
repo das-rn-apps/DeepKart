@@ -57,7 +57,20 @@ export const registerUser = async (
     });
     await user.save();
 
-    res.status(201).json({ message: "User registered successfully" });
+    const token = generateToken(user._id.toString());
+
+    res.status(201).json({
+      message: "User registered successfully",
+      user: {
+        id: user._id,
+        username,
+        email,
+        firstName,
+        lastName,
+        phoneNumber,
+      },
+      token,
+    });
   } catch (error) {
     res.status(500).json({ message: "Error registering user", error });
   }
@@ -74,7 +87,19 @@ export const loginUser = async (req: Request, res: Response): Promise<void> => {
     }
 
     const token = generateToken(user._id.toString());
-    res.json({ token });
+
+    res.json({
+      message: "Login successful",
+      user: {
+        id: user._id,
+        username: user.username,
+        email: user.email,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        phoneNumber: user.phoneNumber,
+      },
+      token,
+    });
   } catch (error) {
     res.status(500).json({ message: "Error logging in", error });
   }
@@ -86,19 +111,30 @@ export const getMe = async (req: Request, res: Response): Promise<void> => {
       res.status(401).json({ message: "Unauthorized" });
       return;
     }
+
     const user = await User.findById(req.user.userId)
       .populate("addresses")
       .lean();
+
     if (!user) {
       res.status(404).json({ message: "User not found" });
       return;
     }
 
-    res.json(user.addresses);
+    res.json({
+      id: user._id,
+      username: user.username,
+      email: user.email,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      phoneNumber: user.phoneNumber,
+      addresses: user.addresses,
+    });
   } catch (error) {
     res.status(500).json({ message: "Error fetching user", error });
   }
 };
+
 export const getAddressById = async (
   req: Request,
   res: Response
@@ -108,13 +144,17 @@ export const getAddressById = async (
       res.status(401).json({ message: "Unauthorized" });
       return;
     }
+
     const address = await Address.findById(req.params.addressId);
     if (!address) {
       res.status(404).json({ message: "Address not found" });
       return;
     }
 
-    res.json(address);
+    res.json({
+      message: "Address fetched successfully",
+      address,
+    });
   } catch (error) {
     res.status(500).json({ message: "Error fetching address", error });
   }
@@ -149,13 +189,22 @@ export const addUserAddress = async (
     });
 
     await newAddress.save();
-    const user = await User.findByIdAndUpdate(
+
+    await User.findByIdAndUpdate(
       req.user.userId,
       { $push: { addresses: newAddress._id } },
       { new: true }
     );
 
-    res.json(user);
+    const updatedUser = await User.findById(req.user.userId).populate(
+      "addresses"
+    );
+
+    res.json({
+      message: "Address added successfully",
+      newAddress,
+      addresses: updatedUser?.addresses,
+    });
   } catch (error) {
     res.status(500).json({ message: "Error adding user address", error });
   }
@@ -215,7 +264,12 @@ export const setDefaultAddress = async (
     await Address.updateMany({ userId }, { isDefault: false });
     await Address.findByIdAndUpdate(addressId, { isDefault: true });
 
-    res.json({ message: "Default address set" });
+    const updatedAddresses = await Address.find({ userId });
+
+    res.json({
+      message: "Default address set",
+      addresses: updatedAddresses,
+    });
   } catch (error) {
     res.status(500).json({ message: "Error setting default address", error });
   }

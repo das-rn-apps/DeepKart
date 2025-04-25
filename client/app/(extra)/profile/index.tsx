@@ -10,7 +10,6 @@ export default function ProfileScreen() {
 
     const handleLogout = async () => {
         await AsyncStorage.removeItem("authToken");
-        console.log("User logged out");
         router.replace("/login");
     };
 

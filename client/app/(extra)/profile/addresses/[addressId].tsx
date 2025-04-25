@@ -13,7 +13,6 @@ export default function AddressDetailsScreen() {
     useEffect(() => {
         const fetchAddress = async () => {
             try {
-                console.log("Fetching address for ID:", addressId);
                 const data = await getAddressById(addressId);
                 setAddress(data);
             } catch (error) {

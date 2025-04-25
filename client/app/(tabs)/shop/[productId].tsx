@@ -68,7 +68,7 @@ export default function ProductDetailsScreen() {
     const handleBuyNow = async () => {
         try {
             // await addCartItem(productId);
-            console.log("Buyingggggg")
+            console.log("Buyingggggg , add function in this ")
         } catch (error) {
             console.error('Error buy item:', error);
             Alert.alert('Error', 'Failed to buy item. Please try again.');
