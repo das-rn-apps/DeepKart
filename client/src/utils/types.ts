@@ -10,7 +10,7 @@ export interface IProduct {
   stock: number;
   attributes: Record<string, any>;
   ratings: number;
-  reviews: string;
+  reviews: number;
   sellerId: string;
   createdAt: Date;
   updatedAt: Date;

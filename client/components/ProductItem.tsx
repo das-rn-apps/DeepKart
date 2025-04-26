@@ -35,10 +35,14 @@ const ProductItem = ({ product }: { product: IProduct }) => {
             {/* <Image source={{ uri: product.images[0] }} style={styles.image} /> */}
             <Image source={require('@/src/pngs/das.png')} style={styles.image} />
 
-
             <View style={styles.details}>
-                <Text style={styles.brand}>{product.brand}</Text>
                 <Text style={styles.name} numberOfLines={1}>{product.name}</Text>
+                <View style={styles.priceRow}>
+                    <Text style={styles.brand}>{product.brand}</Text>
+                    <Text style={[styles.stock, product.stock > 0 ? styles.inStock : styles.outOfStock]}>
+                        {product.stock > 0 ? "In Stock" : "Out of Stock"}
+                    </Text>
+                </View>
 
                 <View style={styles.priceRow}>
                     <Text style={styles.price}>₹{product.discountedPrice ?? product.price}</Text>
@@ -47,11 +51,11 @@ const ProductItem = ({ product }: { product: IProduct }) => {
 
                 <View style={styles.ratingRow}>
                     {renderStars(product.ratings)}
-                    <Text style={styles.reviewCount}>({product.reviews})</Text>
+                    <Text style={styles.reviewCount}>
+                        ({Intl.NumberFormat().format(product.reviews ?? 0)})
+                    </Text>
                 </View>
-                <Text style={[styles.stock, product.stock > 0 ? styles.inStock : styles.outOfStock]}>
-                    {product.stock > 0 ? "In Stock" : "Out of Stock"}
-                </Text>
+
             </View>
         </Pressable>
     );
@@ -80,7 +84,8 @@ const styles = StyleSheet.create({
     }
     ,
     details: {
-        padding: 10,
+        padding: 5,
+        paddingHorizontal: 10
     },
     brand: {
         fontSize: 7,
@@ -96,17 +101,18 @@ const styles = StyleSheet.create({
     priceRow: {
         flexDirection: 'row',
         alignItems: 'center',
+        justifyContent: "space-between"
     },
     price: {
         fontWeight: 'bold',
-        color: Colors.status.success,
-        fontSize: 13,
+        color: Colors.colors.blue[600],
+        fontSize: 10,
     },
     originalPrice: {
         textDecorationLine: 'line-through',
-        color: Colors.text.secondary,
+        color: Colors.status.error,
         marginLeft: 10,
-        fontSize: 13
+        fontSize: 10
     },
     ratingRow: {
         flexDirection: 'row',
